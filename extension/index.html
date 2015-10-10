@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport"  content="width=device-width, maximum-scale=1.0, minimum-scale=1.0, initial-scale=1.0" />		
+		<title>Navneet sharma | Blog</title>
+		<link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css" href="css/blog_styles.css" />
+		<link rel="stylesheet" type="text/css" href="css/blog_layout_large.css" />
+		<link rel="stylesheet" type="text/css" media="only screen and (min-width:50px) and (max-width:500px)"   href="css/blog_layout_small.css">
+		<link rel="stylesheet" type="text/css" media="only screen and (min-width:501px) and (max-width:800px)"  href="css/blog_layout_medium.css">
+	    <link rel="stylesheet" type="text/css" media="print" href="css/print.css" />
+	    <!--[if lt IE 9]>
+			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	
+	</head>
+	<body>
+
+		<div class="page">
+			
+            <header>
+                <!-- logo link -->
+            	<!-- <a class="logo" href="#"></a> -->
+            </header>
+
+            <article>
+				<h1>Writing a browser extension</h1>
+				<h4><b>Creating a Chrome / Opera extension</b></h4>
+				<p>The <a href="https://wiki.mozilla.org/WebExtensions" title=""><strong>WebExtensions API</strong></a>, which is essentially the extension API in Google Chrome and Opera. I thought this was interesting. I've developed a couple of Chrome extensions, and I like their extension API. </p>
+				<p>The UI for Redirector was written in HTML, so in theory I could have stuck with the same UI, but it was really ugly, and I wanted to learn a bit more about <a href="https://angularjs.org/" title=""><strong>angular.js</strong></a>, so I decided to write a completely new UI using Angular. </p>
+				<p>I started by re-writing Redirector as a Chrome extension, testing it on Chrome and making sure it worked correctly there. That was easy, the WebExtensions API has a <a href="https://developer.chrome.com/extensions/webRequest" title=""><strong>WebRequest</strong></a> object that is essentially built for doing exactly what Redirector does, listening to requests and redirecting them. </p>
+				<p>So getting the extension working on Chrome working was fun, the API worked well and I was happy with the UI. Once Chrome worked I tested on Opera and that didn't need any changes at all, it just worked exactly like on Chrome. So the only browser left was Firefox!</p>
+
+            </article>
+            <div class="promo_container" >
+            	
+			    <div class="promo one">
+					<div class="content">
+                       <img src="Images/promo_1_2x.jpg">  
+					</div>
+                </div>
+    
+
+              <div class="clear-fix" ></div>                  
+            </div>
+			<article>
+			        <h4><b>Porting to Firefox</b></h4>
+					<p>At this point WebExtensions support in Firefox had only been announced a couple of weeks previously, and it was only available in the <a href="https://nightly.mozilla.org/" title=""><strong>Nightly</strong></a> development build. I started by testing the extension as it was, but it was clear that the Firefox implementation was nowhere near ready. The redirecting worked, but the toolbar button had some serious issues, and I had another problem, which was that the WebExtensions API has no file system access, and I wanted to automatically migrate existing users of Redirector, and for that I needed to access the Redirector.rjson file which stores their redirects. I also figured that WebExtensions might not be released and supported by <a href="http://addons.mozilla.org/" title=""><strong>addons.mozilla.org</strong></a> until well after multiprocess Firefox was released, which would mean the extension would stop working for weeks or months.</p>
+					<p>
+						At this point I was really interested in finishing the rewrite and getting a working new version out there. So I started thinking that I could release an interim version for Firefox, which would use the old Firefox extension model, but include the new UI. A bonus would be that it would have filesystem access and could migrate the existing redirects of users to some place where in the future the WebExtensions API could load them from.
+					</p>
+					<p>
+						Firefox has their own <a href="https://developer.mozilla.org/en-US/Add-ons/SDK" title=""><strong>Add-on SDK</strong></a> to simplify writing extensions. It makes the experience a lot nicer than it was back in 2007 when I was writing my extensions, but it doesn't give you the same full access to the browser internals as the old extension model did. Nevertheless, it's a nice API and I decided to use that to make the interim version of Redirector for Firefox. I didn't want to maintain two different branches of the code though, so I thought it would be interesting to try to use the same code in all versions of the extension, even though one was using WebExtensions and the other was using the Firefox Add-on SDK.
+					</p>    	
+			</article>
+			<article>
+			        <h4><b>The result</b></h4>
+			        <p>
+			        	The result of all this is Redirector 3.0.3, available for <a href="https://chrome.google.com/webstore/detail/redirector/ocgpenflpmgnfapjedencafcfakcekcd" title=""><strong>Chrome</strong></a>,<a href="https://addons.mozilla.org/en-US/firefox/addon/5064" title=""><strong> Firefox</strong></a> and <a href="https://addons.opera.com/en/extensions/details/redirector-2/" title=""><strong>Opera</strong></a>. This was a fun little project, and I'm happy with the results. When WebExtensions support in Firefox is ready I'll just remove all the polyfill code and then I'll (hopefully) have the exact same code for all the browsers. There are also rumours that the new Edge browsers from Microsoft will have a similar extension models, so maybe Redirector will be available for that at some point as well!
+			        </p>
+				
+			</article>
+
+            <nav>
+            	<a href="../index.html">Home</a>
+            	<a href="#">Blogs</a>
+            	<a href="http://www.navneetsharma.in">Portfolio</a>
+ 
+            </nav>
+
+            <footer>
+            	&copy; copyright 2015 - Navneet Sharma
+				            	<div class="print qr">
+					
+					<p><em>This page printed from:</em></p>
+					<pre>navneetsharma.in/blog</pre>
+					<p><strong>navneetsharma.in/blog</strong> is a  blog created by Navneet sharma where he provides information about latest technologies and technicals herdals faced by beginners in programming field.</p>
+					<div class="clear-fix"></div>
+				</div>
+            </footer>
+
+		</div>
+
+	</body>
+</html>
